@@ -21,23 +21,32 @@ cat /home/build/immortalwrt/files/etc/config/pppoe-settings
 echo "$(date '+%Y-%m-%d %H:%M:%S') - 开始编译..."
 
 # 定义所需安装的包列表 下列插件你都可以自行删减
-PACKAGES=""
 PACKAGES="$PACKAGES curl"
 PACKAGES="$PACKAGES luci-i18n-diskman-zh-cn"
 PACKAGES="$PACKAGES luci-i18n-firewall-zh-cn"
 PACKAGES="$PACKAGES luci-i18n-eqos-zh-cn"
 PACKAGES="$PACKAGES luci-i18n-upnp-zh-cn"
-PACKAGES="$PACKAGES luci-theme-material"
-PACKAGES="$PACKAGES luci-theme-openwrt-2020"
 PACKAGES="$PACKAGES luci-app-acme"
 PACKAGES="$PACKAGES luci-i18n-acme-zh-cn"
 PACKAGES="$PACKAGES luci-app-ddns-go"
 PACKAGES="$PACKAGES luci-i18n-ddns-go-zh-cn"
-PACKAGES="$PACKAGES luci-nginx"
 PACKAGES="$PACKAGES luci-app-wechatpush"
 PACKAGES="$PACKAGES luci-i18n-wechatpush-zh-cn"
 PACKAGES="$PACKAGES luci-app-openvpn"
 PACKAGES="$PACKAGES luci-i18n-openvpn-zh-cn"
+PACKAGES="$PACKAGES luci-app-homeproxy"
+PACKAGES="$PACKAGES luci-i18n-homeproxy-zh-cn"
+PACKAGES="$PACKAGES luci-proto-wireguard"
+PACKAGES="$PACKAGES qrencode"
+PACKAGES="$PACKAGES luci-app-uhttpd"
+PACKAGES="$PACKAGES luci-i18n-uhttpd-zh-cn"
+PACKAGES="$PACKAGES luci-app-sqm"
+PACKAGES="$PACKAGES luci-i18n-sqm-zh-cn"
+PACKAGES="$PACKAGES luci-app-statistics"
+PACKAGES="$PACKAGES luci-i18n-statistics-zh-cn"
+PACKAGES="$PACKAGES luci-app-advanced-reboot"
+PACKAGES="$PACKAGES luci-i18n-advanced-reboot-zh-cn"
+PACKAGES="$PACKAGES tailscale"
 
 # 服务——FileBrowser 用户名admin 密码admin
 PACKAGES="$PACKAGES luci-i18n-filebrowser-go-zh-cn"
@@ -49,8 +58,8 @@ PACKAGES="$PACKAGES luci-i18n-ttyd-zh-cn"
 
 # 判断是否需要编译 Docker 插件
 if [ "$INCLUDE_DOCKER" = "yes" ]; then
-    PACKAGES="$PACKAGES luci-i18n-dockerman-zh-cn"
-    echo "Adding package: luci-i18n-dockerman-zh-cn"
+	PACKAGES="$PACKAGES luci-i18n-dockerman-zh-cn"
+	echo "Adding package: luci-i18n-dockerman-zh-cn"
 fi
 
 # 构建镜像
@@ -60,8 +69,8 @@ echo "$PACKAGES"
 make image PROFILE="generic" PACKAGES="$PACKAGES" FILES="/home/build/immortalwrt/files" ROOTFS_PARTSIZE=$PROFILE
 
 if [ $? -ne 0 ]; then
-    echo "$(date '+%Y-%m-%d %H:%M:%S') - Error: Build failed!"
-    exit 1
+	echo "$(date '+%Y-%m-%d %H:%M:%S') - Error: Build failed!"
+	exit 1
 fi
 
 echo "$(date '+%Y-%m-%d %H:%M:%S') - Build completed successfully."
