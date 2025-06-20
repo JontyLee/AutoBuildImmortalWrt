@@ -39,7 +39,6 @@ PACKAGES="$PACKAGES luci-i18n-uhttpd-zh-cn"
 PACKAGES="$PACKAGES luci-app-sqm"
 PACKAGES="$PACKAGES luci-i18n-sqm-zh-cn"
 PACKAGES="$PACKAGES tailscale"
-PACKAGES="$PACKAGES luci-app-tailscale"
 
 # 服务——FileBrowser 用户名admin 密码admin
 PACKAGES="$PACKAGES luci-i18n-filebrowser-go-zh-cn"
