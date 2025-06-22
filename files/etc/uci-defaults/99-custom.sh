@@ -129,41 +129,4 @@ FILE_PATH="/etc/openwrt_release"
 NEW_DESCRIPTION="Compiled by JontyLee"
 sed -i "s/DISTRIB_DESCRIPTION='[^']*'/DISTRIB_DESCRIPTION='$NEW_DESCRIPTION'/" "$FILE_PATH"
 
-# 禁用uhttpd服务
-/etc/init.d/uhttpd disable
-/etc/init.d/uhttpd stop
-
-# 启用nginx服务
-/etc/init.d/nginx enable
-/etc/init.d/nginx start
-
-# 配置nginx作为Web界面服务器
-mkdir -p /etc/nginx/conf.d
-cat > /etc/nginx/conf.d/luci.conf <<EOF
-server {
-    listen 80;
-    listen [::]:80;
-    server_name  localhost;
-    
-    location / {
-        root /www;
-        index  index.html index.htm index.php;
-        try_files \$uri \$uri/ /index.php?\$args;
-    }
-    
-    location ~ \.php$ {
-        root /www;
-        include fastcgi_params;
-        fastcgi_pass unix:/var/run/fcgiwrap.socket;
-        fastcgi_index index.php;
-        fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
-    }
-}
-EOF
-
-# 重启nginx应用新配置
-/etc/init.d/nginx restart
-
-echo "Nginx configured and enabled, uhttpd disabled at $(date)" >>$LOGFILE
-
 exit 0
