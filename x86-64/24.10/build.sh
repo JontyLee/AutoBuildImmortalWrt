@@ -69,3 +69,5 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "$(date '+%Y-%m-%d %H:%M:%S') - Build completed successfully."
+
+# curl luci-i18n-diskman-zh-cn luci-i18n-firewall-zh-cn luci-i18n-eqos-zh-cn luci-i18n-upnp-zh-cn luci-app-ddns-go luci-i18n-ddns-go-zh-cn luci-app-wechatpush luci-i18n-wechatpush-zh-cn luci-app-homeproxy luci-i18n-homeproxy-zh-cn luci-app-sqm luci-i18n-sqm-zh-cn luci-proto-wireguard qrencode luci-app-wol luci-i18n-wol-zh-cn luci-i18n-filebrowser-go-zh-cn luci-app-argon-config luci-i18n-argon-config-zh-cn luci-i18n-package-manager-zh-cn luci-i18n-ttyd-zh-cn
